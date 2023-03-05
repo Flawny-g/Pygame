@@ -1,5 +1,4 @@
 import pygame, sys
-import level2
 
 
  
@@ -23,7 +22,6 @@ def main():
  air_timer = 0
  Run = True
  game_over = False
- update = True
  font = pygame.font.Font('freesansbold.ttf', 30)
  font2 = pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
@@ -43,7 +41,7 @@ def main():
     return game_map
     
 
- game_map = load_map('map')
+ game_map = load_map('map4')
 
 
  grass_img = pygame.image.load('grass.png')
@@ -61,12 +59,11 @@ def main():
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
  level_rect = portal_img.get_rect()
- level_rect.x =1098
- level_rect.y= 387
- 
+ level_rect.x =1105
+ level_rect.y= 227
  speedup = False
- current_time= 0
  enemy_move_left = False
+ current_time= 0
 
 
  
@@ -104,23 +101,21 @@ def main():
 
 
  while Run == True: # game loop
-    
     display.blit(bg,(0,0))
     
-    ## usable stuff current_time = str(pygame.time.get_ticks())
-    
-    
+    current_time = pygame.time.get_ticks()
+    ## usable stuff print(str(current_time[1]))
     
 
     if player_rect.y > 400:
         game_over = True
-        update = False
         print("Death")
     
     
 
+    
     if player_rect.colliderect(level_rect):
-        level2.main()
+        return
         
     
 
@@ -155,7 +150,9 @@ def main():
             if tile == '1':
                 display.blit(dirt_img,(x*16-scroll[0],y*16-scroll[1]))
             if tile == '2':
-                display.blit(grass_img,(x*16-scroll[0],y*16-scroll[1]))    
+                display.blit(grass_img,(x*16-scroll[0],y*16-scroll[1]))
+            if tile == '3':
+                display.blit(portal_img,(x*16-scroll[0],y*16-scroll[1]))    
             if tile != '0':
                 tile_rects.append(pygame.Rect(x*16,y*16,16,16))
             x += 1
@@ -186,6 +183,7 @@ def main():
     display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
     display.blit(portal_img,(level_rect.x-scroll[0],level_rect.y-scroll[1]))
     
+    
     if player_rect.colliderect(enemy_rect):
         game_over = True
         gameover = font.render("Press R to Respawn", False, (255, 255, 255))
@@ -193,12 +191,9 @@ def main():
         rect.center = display.get_rect().center
         display.blit
         display.blit(gameover, rect)
-        
-        update = False
     if player_rect.colliderect(chest_rect):
         speedup = True
         
-# enemy movement code by surya
     if enemy_rect.x ==32:
         enemy_move_left = False
 
@@ -209,6 +204,9 @@ def main():
         enemy_rect = enemy_rect.move([1,0])
     else:
         enemy_rect = enemy_rect.move([-1,0])
+    
+        
+
     
      
     
@@ -233,13 +231,6 @@ def main():
                 moving_right = True
             if event.key == K_LEFT:
                 moving_left = True
-            if event.key == K_d:
-                moving_right = True
-            if event.key == K_a:
-                moving_left = True
-            if event.key == K_SPACE:
-                if air_timer < 6:
-                    vertical_momentum = -5
             if event.key == K_UP:
                 if air_timer < 6:
                     vertical_momentum = -5
@@ -248,16 +239,10 @@ def main():
                 moving_right = False
             if event.key == K_LEFT:
                 moving_left = False
-            if event.key == K_d:
-                moving_right = False
-            if event.key == K_a:
-                moving_left = False
             if event.key == pygame.K_r and game_over == True:
-                
-                update = True
                 main()
 
-    level_show = font2.render("Level : 1", False, (255, 255, 255))
+    level_show = font2.render("Level : 4", False, (255, 255, 255))
     rect2 = level_show.get_rect()
     rect2.topright = display.get_rect().topright
     display.blit
@@ -269,11 +254,7 @@ def main():
             
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
-   
-         
-    
     pygame.display.update()
-    
     def speed():
      clock.tick(60)
     if speedup == False:
@@ -288,4 +269,3 @@ def main():
     
 
     
-main()
