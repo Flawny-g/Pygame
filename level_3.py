@@ -52,17 +52,17 @@ def main():
  
 
 
- player_img = pygame.image.load('player.png').convert()
+ player_img = pygame.image.load('player (2).png').convert_alpha()
  player_img.set_colorkey((255,255,255))
- enemy_img = pygame.image.load('enemys.png').convert()
- chest_img = pygame.image.load('chest.png').convert()
+ enemy_img = pygame.image.load('enemys.png').convert_alpha()
+ chest_img = pygame.image.load('chest.png').convert_alpha()
  
- player_rect = pygame.Rect(100,100,5,13)
+ player_rect = pygame.Rect(100,100,12,24)
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
  level_rect = portal_img.get_rect()
- level_rect.x =646
- level_rect.y= 163
+ level_rect.x =1058
+ level_rect.y= 632
  enemy_move_left = False
  
  speedup = False
@@ -110,7 +110,7 @@ def main():
     ## usable stuff print(str(current_time[1]))
     
 
-    if player_rect.y > 400:
+    if player_rect.y >= 1500:
         game_over = True
         
     
@@ -267,4 +267,3 @@ def main():
     print(f"Y:{player_rect.y}")
     
     
-
