@@ -1,6 +1,6 @@
 import pygame, sys
 import level2
-from pyvidplayer import Video
+
  
 
 
@@ -297,22 +297,4 @@ def main():
     print(f"X:{player_rect.x}")
     print(f"Y:{player_rect.y}")
 
- vid = Video("football.mp4")
- vid.set_size((900, 900))
-
-
- def intro():
-    while True:
-
-        vid.draw(screen, (0, 0))
-        pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                vid.close()
-                main()
-
- 
- #if __name__ == '__main__' : 
-     
-     
-     #intro()
+main()
