@@ -42,7 +42,7 @@ def main():
  true_scroll = [0,0]
 
  def load_map(path):
-    f = open(path + '.txt','r')
+    f = open(path + '.txt','r') 
     data = f.read()
     f.close()
     data = data.split('\n')
@@ -119,12 +119,19 @@ def main():
     
     display.blit(bg,(0,0))
     
-    pygame.time.get_ticks()
+    time = str(pygame.time.get_ticks())
+
+    gameover = font2.render(time, False, (255, 255, 255))
+    rect = gameover.get_rect()
+    
+   
+    display.blit(gameover, rect)
+       
     
     
     
 
-    if player_rect.y > 400:
+    if player_rect.y > 900:
         game_over = True
         update = False
         print("Death")

@@ -115,11 +115,13 @@ def main():
 
     
     if player_rect.colliderect(level_rect):
-        level_show = font2.render("Level : 1", False, (255, 255, 255))
-        rect2 = level_show.get_rect()
-        rect2.topright = display.get_rect().topright
-        display.blit
-        display.blit(level_show, rect2)
+        gameover = font.render("NEW LEVEL COMING SOON", False, (255, 255, 255))
+        rect = gameover.get_rect()
+        rect.center = display.get_rect().center
+        display.fill((0,0,0))
+        display.blit(gameover, rect)
+       
+        
     
            
         
@@ -274,4 +276,3 @@ def main():
     
     
 
-    
